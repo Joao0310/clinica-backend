@@ -2,10 +2,14 @@ from flask import Blueprint, request, jsonify, current_app
 from datetime import datetime
 from bson import ObjectId
 
+from app.utils.verificar_token import token_required
+
+
 pacientes_bp = Blueprint("pacientes", __name__)
 
 
 @pacientes_bp.route("/", methods=["POST"])
+@token_required
 def criar_paciente():
     try:
         dados = request.get_json()
@@ -37,6 +41,7 @@ def criar_paciente():
         return jsonify({"erro": str(e)}), 500
     
 @pacientes_bp.route("/", methods=["GET"])
+@token_required
 def listar_pacientes():
     try:
         db = current_app.extensions["mongo_db"]
@@ -60,6 +65,7 @@ def listar_pacientes():
         return jsonify({"erro": str(e)}), 500
     
 @pacientes_bp.route("/<id>", methods=["GET"])
+@token_required
 def buscar_paciente_por_id(id):
     try:
         db = current_app.extensions["mongo_db"]
@@ -84,6 +90,7 @@ def buscar_paciente_por_id(id):
         return jsonify({"erro": "ID inválido ou erro na busca"}), 400
     
 @pacientes_bp.route("/<id>", methods=["PUT"])
+@token_required
 def atualizar_paciente(id):
     try:
         dados = request.get_json() or {}
@@ -112,6 +119,7 @@ def atualizar_paciente(id):
         return jsonify({"erro": "ID inválido ou erro na atualização"}), 400
     
 @pacientes_bp.route("/<id>", methods=["DELETE"])
+@token_required
 def excluir_paciente(id):
     try:
         db = current_app.extensions["mongo_db"]
