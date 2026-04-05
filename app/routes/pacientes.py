@@ -25,7 +25,7 @@ def criar_paciente():
             "data_nascimento": dados["data_nascimento"],
             "contato": dados["contato"],
             "especialidade": dados["especialidade"],
-            "notas": dados.get("notas", ""),
+            "observacoes": dados.get("observacoes", ""),
             "criado_em": datetime.utcnow()
         }
 
