@@ -50,8 +50,7 @@ A API está disponível em:
 ### 1. Clonar o repositório
 
 ```bash
-git clone <url-do-repositorio>
-cd <nome-do-repositorio>
+git clone <https://github.com/Joao0310/clinica-backend.git>
 ```
 
 ### 2. Criar ambiente virtual
